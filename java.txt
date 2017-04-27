@@ -1,0 +1,22 @@
+group 'hello'
+version '1.0-SNAPSHOT'//需要 java插件
+apply plugin: 'java'sourceCompatibility = 1.5//maven库
+repositories {
+    mavenCentral()
+}
+//添加依赖
+dependencies {
+    compile "joda-time:joda-time:2.2"
+    // https://mvnrepository.com/artifact/org.codehaus.jettison/jettison
+    compile group: 'org.codehaus.jettison', name: 'jettison', version: '1.1'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+//jar包的命名
+jar {
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    manifest {
+        attributes 'Main-Class': 'hello.HelloWorld'
+    }
+    baseName = 'hello'
+    version = '0.1.0'
+}

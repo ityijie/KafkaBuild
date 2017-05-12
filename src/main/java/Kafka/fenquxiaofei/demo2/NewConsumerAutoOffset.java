@@ -1,4 +1,4 @@
-package Kafka;
+package Kafka.fenquxiaofei.demo2;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;

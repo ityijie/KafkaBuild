@@ -37,7 +37,7 @@ object KafkaEventProducer {
 
 
   def main(args: Array[String]): Unit = {
-    val topic = "action_test"
+    val topic = "lijietest"
     //val brokers = "172.20.1.104:9092"
     val brokers = "172.20.1.104:9092,172.20.1.103:9092"
     val props = new Properties()
@@ -59,9 +59,11 @@ object KafkaEventProducer {
         .put("num", a)
 
       // produce event message
-      producer.send(new KeyedMessage[String, String](topic, event.toString))
+      //producer.send(new KeyedMessage[String, String](topic, event.toString))
+      val i = a%4
+      //往不同的分区发送数据
+      producer.send(new KeyedMessage[String,String](topic, "partition[" + i + "]",event.toString))
       println("Message sent: " + event)
-
       Thread.sleep(100)
 
     }

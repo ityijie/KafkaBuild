@@ -42,21 +42,21 @@ public class NewConsumerAutoOffset {
 
     }
 
-    public static KafkaConsumer createConsumer(String group_id){
+    public static KafkaConsumer createConsumer(String group_id,String thread){
 
         //设置consumer group name,必须设置
         properties.put("group.id",group_id);
 
         consumer = new KafkaConsumer<String, String>(properties);
 
-        consumer.subscribe(Arrays.asList("flumeTest"));
+        consumer.subscribe(Arrays.asList("lijietest"));
 
         while (true){
             ConsumerRecords<String,String> records = consumer.poll(100);
             for (ConsumerRecord<String,String> record:records){
 
                 System.out.printf("offset = %d, key = %s, value = %s", record.offset(), record.key(), record.value());
-                System.out.println();
+                System.out.println(thread+"--"+record.partition());
             }
 
         }
